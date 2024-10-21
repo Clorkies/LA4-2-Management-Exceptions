@@ -17,10 +17,10 @@ public class Customer extends Person {
      * @return the dialogue of the customer
      */
     public String speak(Employee e) {
-        if (e instanceof Developer && getAge() > e.getAge()) {
-            return String.format("Can I see your manager %s", ((Developer) e).getProjectManager());
+        if (e instanceof Developer && getAge() > e.getAge() && ((Developer) e).getProjectManager() != null) {
+            return String.format("Can I see your manager %s?", ((Developer)e).getProjectManager().getName());
         } else {
-            return String.format("Oh hello, %s. Can you assist me?", e.getName());
+            return String.format("Oh, hello, %s. Can you assist me?", e.getName());
         }
     }
 }

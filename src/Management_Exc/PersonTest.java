@@ -65,10 +65,12 @@ class PersonTest {
         persons.add(new Employee("Jeshiel", 21, 35000));
         persons.add(new Manager("Mary", 24, 50200));
         persons.add(new Manager("Claire", 27, 52600));
+
         assertDoesNotThrow(()-> {
             Main.assignPM(persons, "Vince", "Mary");
             Main.assignPM(persons, "Jea", "Claire");
         });
+
         Developer vince = (Developer) persons.get(1);
         Developer jea = (Developer) persons.get(0);
         assertEquals(vince.getProjectManager(), persons.get(3));

@@ -12,7 +12,7 @@ public abstract class Person {
      */
     public Person(String name, int age) throws RuntimeException {
         if (age < 0) {
-            throw new IllegalArgumentException("Age must be non-negative");
+            throw new IllegalArgumentException("Age must be non-negative.");
         }
         this.name = name;
         this.age = age;

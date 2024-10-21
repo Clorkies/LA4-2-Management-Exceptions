@@ -15,7 +15,7 @@ public class Employee extends Person {
         if (salary < 30000) {
             throw new IllegalArgumentException("Salary must be greater than or equal to 30000");
         }
-        this.salary = salary;
+        setSalary(salary);
     }
 
     public double getSalary() {

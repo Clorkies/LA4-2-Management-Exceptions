@@ -15,11 +15,33 @@ public class Main {
      * @throws NoSuchElementException when given manager or employee does not exist in the list of persons
      */
 
-
     public static void giveRaise(List<Person> persons, String manager, String employee, double salary)  {
+        Manager managerObj = null;
+        Employee employeeObj = null;
+
         for (Person p: persons) {
-            if (p.getName().equals(manager));
+            if (p.getName().equals(manager)) {
+                if (!(p instanceof Manager)) {
+                    throw new ClassCastException(p.getName() + " is not a manager");
+                }
+                managerObj = (Manager) p;
+            }
+            if (p.getName().equals(employee)) {
+                if (!(p instanceof Employee)) {
+                    throw new ClassCastException(p.getName() + " is not an employee");
+                }
+                employeeObj = (Employee) p;
+            }
         }
+
+        if (managerObj == null) {
+            throw new NoSuchElementException(manager + " does not exist");
+        }
+        if (employeeObj == null) {
+            throw new NoSuchElementException(employee + " does not exist");
+        }
+
+        managerObj.giveRaise(employeeObj, salary);
     }
 
     /**
@@ -31,17 +53,37 @@ public class Main {
      * @throws NoSuchElementException when given manager or developer does not exist in the list of persons
      * @throws IllegalStateException when developer already has a manager
      */
+
     public static void assignPM(List<Person> persons, String developer, String manager) {
-        boolean found = false;
+        Developer developerObj = null;
+        Manager managerObj = null;
+
         for (Person p: persons) {
             if (p.getName().equals(developer)) {
-                ((Developer) p).setProjectManager(new Manager(manager,0, 0));
+                if (!(p instanceof Developer)) {
+                    throw new ClassCastException(p.getName() + " is not a developer");
+                }
+                developerObj = (Developer) p;
+            }
+
+            if (p.getName().equals(manager)) {
+                if (!(p instanceof Manager)) {
+                    throw new ClassCastException(p.getName() + " is not a manager");
+                }
+                managerObj = (Manager) p;
             }
         }
-        if (!found) {
-            throw new NoSuchElementException("name does not exist");
+
+        if (managerObj == null) {
+            throw new NoSuchElementException(manager + " does not exist");
         }
+        if (developerObj == null) {
+            throw new NoSuchElementException(developer + " does not exist");
+        }
+
+        developerObj.setProjectManager(managerObj);
     }
+
 
     /**
      * TODO this implementation
@@ -53,11 +95,31 @@ public class Main {
      * @throws NoSuchElementException when given customer or employee is not in the list of persons
      */
     public static String customerSpeak(List<Person> persons, String customer, String employee) {
+        Customer customerObj = null;
+        Employee employeeObj = null;
+
         for (Person p: persons) {
             if (p.getName().equals(customer)) {
-                return ((Customer) p).speak(new Employee(employee, 0, 0));
+                if (!(p instanceof Customer)) {
+                    throw new ClassCastException(p.getName() + " is not a customer");
+                }
+                customerObj = (Customer) p;
+            }
+            if (p.getName().equals(employee)) {
+                if (!(p instanceof Employee)) {
+                    throw new ClassCastException(p.getName() + " is not an employee");
+                }
+                employeeObj = (Employee) p;
             }
         }
-        return null;
+
+        if (customerObj == null) {
+            throw new NoSuchElementException(customer + " does not exist");
+        }
+        if (employeeObj == null) {
+            throw new NoSuchElementException(employee + " does not exist");
+        }
+
+        return customerObj.speak(employeeObj);
     }
 }
